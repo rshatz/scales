@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>fretboard.png</file>
+        <file>stylesheet.qss</file>
+    </qresource>
+</RCC>
