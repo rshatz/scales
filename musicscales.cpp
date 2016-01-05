@@ -136,32 +136,31 @@ void MusicScales::drawScale()
     const int xCoordinate[13] = {20, 100, 190, 280, 370, 460, 553, 643,
                           733, 825, 915, 1010, 1100};
 
-    int rootNote = scaleDegrees[0];
+    //int rootNote = scaleDegrees[0];
 
     fretBoardNotes = new QPushButton *[6];
 
     QListIterator<int> i(scaleDegrees);
     for(int string = 0; string < 6; string++)
     {
-        int notePos = tuningFormula[string];
-        int y = yCoordinate[string];
+        int notePos = tuningFormula[string];//starting note for each string
+
         fretBoardNotes[string] = new QPushButton[13];
 
         for(int fret = 0; fret < 13; fret++)
         {
             connect(&fretBoardNotes[string][fret], SIGNAL(clicked(bool)),
-                    this, SLOT(testSlot()));
-            int x = xCoordinate[fret];
-            if(notePos >= 12)
+                    this, SLOT(testSlot()));//each button needs to connected
+            if(notePos >= 12)//to reset notes to starting point
             {
                 notePos = 0;
             }
 
             fretBoardNotes[string][fret].setParent(QWidget::parentWidget());
             fretBoardNotes[string][fret].setText(noteList[notePos]);
-            fretBoardNotes[string][fret].setGeometry(x, y, 38, 30);
+            fretBoardNotes[string][fret].setGeometry(xCoordinate[fret], yCoordinate[string], 38, 30);
 
-            if(fretBoardNotes[string][fret].text() == noteList[rootNote])
+            if(fretBoardNotes[string][fret].text() == noteList[scaleDegrees[0]])//scaleDegrees[0] represents root note
             {
                 fretBoardNotes[string][fret].setObjectName("rootButton");//set ID Selector for corresponding style sheet
                 fretBoardNotes[string][fret].setStyleSheet("QPushButton#rootButton{background-color: maroon;}"
