@@ -5,23 +5,29 @@
 #include <QComboBox>
 #include <QPushButton>
 #include <QLabel>
+#include <QCheckBox>
+#include <QPixmap>
 
-#include "musicscales.h"
+#include "fretboard.h"
+#include "tabarea.h"
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = 0);
+
+    MainWindow();
     ~MainWindow();
 
 private slots:
 
-    void keyChange();
-    void scaleChange();
-    void tuningChange();
-    void drawScale();
+    void keyChanged();
+    void scaleChanged();
+    void tuningChanged();
+    void showScale();
+    void tabMode();
+    void checkBoxState();//delete?
 
 private:
 
@@ -29,19 +35,21 @@ private:
 
     QToolBar *selectionToolBar;
 
+    QCheckBox *allNoteCheckBox;
     QComboBox *keyComboBox;
     QComboBox *scaleComboBox;
     QComboBox *tuningComboBox;
 
     QPushButton *submitButton;
+    QPushButton *clearButton;
 
-    QLabel **noteLabels;
-    QLabel *fretBoardLabel;
+    QLabel *fretBoardImage;
     QLabel *keyLabel;
     QLabel *scaleLabel;
     QLabel *tuningLabel;
 
-    MusicScales *musicScale;
+    Fretboard *fretboard;
+    TabArea *tabArea;
 };
 
 #endif // MAINWINDOW_H
